@@ -45,6 +45,12 @@ class Book(models.Model):
         related_name="books",
         help_text="Выберите жанр книги",
     )
+    language = models.ForeignKey(
+        "Language",
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="books",
+    )
 
     def __str__(self) -> str:
         return f"{self.title}"
@@ -126,3 +132,16 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return reverse("author-detail", args=[str(self.pk)])
+
+
+class Language(models.Model):
+    name = models.CharField(
+        "язык книги",
+        max_length=50,
+    )
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse("language-detail", args=[str(self.pk)])

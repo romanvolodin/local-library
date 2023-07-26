@@ -36,6 +36,17 @@
               <li>
                 <a href="{% url 'authors' %}">Все авторы</a>
               </li>
+              <hr>
+              {% if user.is_authenticated %}
+                <li>
+                  Вы вошли как: <strong>{{ user.get_username }}</strong>.
+                  <a href="{% url 'logout' %}">Выйти</a>
+                </li>
+              {% else %}
+                <li>
+                  <a href="{% url 'login' %}?next={{ request.path }}">Войти</a>
+                </li>
+              {% endif %}
             </ul>
           {% endblock sidebar %}
 

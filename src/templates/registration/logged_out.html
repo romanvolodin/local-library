@@ -1,0 +1,10 @@
+{% extends "catalog/_base.html" %}
+
+{% block title %}
+  Local Library - Вы вышли из системы
+{% endblock title %}
+
+{% block content %}
+  <p>Вы вышли из системы.</p>
+  <a href="{% url 'login' %}">Нажмите здесь, чтобы войти снова.</a>
+{% endblock content %}

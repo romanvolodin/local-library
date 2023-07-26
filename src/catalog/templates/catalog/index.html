@@ -1,24 +1,35 @@
 {% extends "catalog/_base.html" %}
 
-{% block title %} Local Library - Главная {% endblock %}
+{% block title %}
+  Local Library - Главная
+{% endblock title %}
 
 {% block content %}
-<h1>Local Library</h1>
-
-<p>Добро пожаловать на <em>LocalLibrary</em> — простой Django-сайт, созданный как учебный пример на Mozilla Developer
-  Network.</p>
-
-<h2>Динамические данные</h2>
-
-<p>Библиотека содержит следующее количество записей:</p>
-
-<ul>
-  <li><strong>Книги:</strong> {{ book_count }}</li>
-  <li><strong>Экземпляры книг:</strong> {{ instance_count }}</li>
-  <li><strong>Доступные экземпляры:</strong> {{ available_instance_count }}</li>
-  <li><strong>Авторы:</strong> {{ author_count }}</li>
-  <li><strong>Жанры:</strong> {{ genre_count }}</li>
-  <li><strong>Книги, с словом "Астронавт" в названии:</strong> {{ astronaut_count }}</li>
-</ul>
-
-{% endblock %}
+  <h1>Local Library</h1>
+  <p>
+    Добро пожаловать на <em>LocalLibrary</em> — простой Django-сайт, созданный как учебный пример на Mozilla Developer
+    Network.
+  </p>
+  <h2>Динамические данные</h2>
+  <p>Библиотека содержит следующее количество записей:</p>
+  <ul>
+    <li>
+      <strong>Книги:</strong> {{ book_count }}
+    </li>
+    <li>
+      <strong>Экземпляры книг:</strong> {{ instance_count }}
+    </li>
+    <li>
+      <strong>Доступные экземпляры:</strong> {{ available_instance_count }}
+    </li>
+    <li>
+      <strong>Авторы:</strong> {{ author_count }}
+    </li>
+    <li>
+      <strong>Жанры:</strong> {{ genre_count }}
+    </li>
+    <li>
+      <strong>Книги, с словом "Астронавт" в названии:</strong> {{ astronaut_count }}
+    </li>
+  </ul>
+{% endblock content %}

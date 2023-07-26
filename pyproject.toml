@@ -7,6 +7,7 @@ profile = 'django'
 use_gitignore = true
 blank_line_before_tag = 'block'
 blank_line_after_tag = 'load,extends,include,endblock'
+format_attribute_template_tags = true
 
 [tool.flake8]
 ignore = ['W503']
@@ -17,4 +18,4 @@ profile = 'black'
 line_length = 100
 lines_after_imports = 2
 skip_gitignore = true
-extend_skip = ['migrations',]
+extend_skip = ['migrations']

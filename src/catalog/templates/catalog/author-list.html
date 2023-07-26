@@ -1,0 +1,22 @@
+{% extends "catalog/_base.html" %}
+
+{% block content %}
+  <h1>Список авторов</h1>
+  {% if not author_list %}
+    <p>Авторов пока нет.</p>
+  {% else %}
+    <ul>
+      {% for author in author_list %}
+        <li>
+          <a href="{{ author.get_absolute_url }}">{{ author }}</a> ( {{ author.date_of_birth }} —
+          {% if not author.date_of_death %}
+            ...
+          {% else %}
+            {{ author.date_of_death }}
+          {% endif %}
+          )
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock content %}

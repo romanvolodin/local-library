@@ -1,0 +1,48 @@
+{% extends "catalog/_base.html" %}
+
+{% block content %}
+  <h1>{{ book.title }}</h1>
+  <p>
+    <strong>Автор:</strong> <a href="">{{ book.author }}</a>
+  </p>
+  <p>
+    <strong>Описание:</strong> {{ book.summary }}
+  </p>
+  <p>
+    <strong>ISBN:</strong> {{ book.isbn }}
+  </p>
+  <p>
+    <strong>Язык:</strong> {{ book.language }}
+  </p>
+  <p>
+    <strong>Жанр:</strong>
+    {% for genre in book.genre.all %}
+      {{ genre }}
+      {% if not forloop.last %},{% endif %}
+    {% endfor %}
+  </p>
+  <div class="ms-3 mt-3">
+    <h4>Экземпляры</h4>
+    {% for book_instance in book.instances.all %}
+      <hr>
+      <p class="{% if book_instance.status == 'a' %}
+                  text-success
+                {% elif book_instance.status == 'm' %}
+                  text-danger
+                {% else %}
+                  text-warning
+                {% endif %}">{{ book_instance.get_status_display }}</p>
+      {% if book_instance.status != 'a' %}
+        <p>
+          <strong>Доступна после:</strong> {{ book_instance.due_back }}
+        </p>
+      {% endif %}
+      <p>
+        <strong>Издательство:</strong> {{ book_instance.imprint }}
+      </p>
+      <p class="text-muted">
+        <strong>Id:</strong> {{ book_instance.id }}
+      </p>
+    {% endfor %}
+  </div>
+{% endblock content %}

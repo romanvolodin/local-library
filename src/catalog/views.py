@@ -25,6 +25,7 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 20
     template_name = "catalog/book-list.html"
 
 

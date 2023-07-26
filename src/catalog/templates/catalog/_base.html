@@ -45,6 +45,33 @@
           {% block content %}
           {% endblock content %}
 
+          {% block pagination %}
+            {% if is_paginated %}
+              <nav>
+                <ul class="pagination">
+                  <li class="page-item
+                             {% if not page_obj.has_previous %}disabled{% endif %}">
+                    <a class="page-link"
+                       {% if page_obj.has_previous %}href="{{ request.path }}?page={{ page_obj.previous_page_number }}{% endif %}
+                       ">Назад</a>
+                  </li>
+                  {% for page in paginator.page_range %}
+                    <li class="page-item">
+                      <a class="page-link
+                                {% if page_obj.number == page %}active{% endif %}"
+                         href="{{ request.path }}?page={{ page }}">{{ page }}</a>
+                    </li>
+                  {% endfor %}
+                  <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                    <a class="page-link"
+                       {% if page_obj.has_next %}href="{{ request.path }}?page={{ page_obj.next_page_number }}{% endif %}
+                       ">Далее</a>
+                  </li>
+                </ul>
+              </nav>
+            {% endif %}
+          {% endblock pagination %}
+
         </div>
       </div>
     </div>

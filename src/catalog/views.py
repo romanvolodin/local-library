@@ -12,6 +12,9 @@ def index(request):
     genre_count = Genre.objects.count()
     astronaut_count = Book.objects.filter(title__icontains="Астронавт").count()
 
+    visit_count = request.session.get("visit_count", 0)
+    request.session["visit_count"] = visit_count + 1
+
     context = {
         "book_count": book_count,
         "instance_count": instance_count,
@@ -19,6 +22,7 @@ def index(request):
         "author_count": author_count,
         "genre_count": genre_count,
         "astronaut_count": astronaut_count,
+        "visit_count": visit_count,
     }
     return render(request, "catalog/index.html", context)
 

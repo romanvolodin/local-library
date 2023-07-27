@@ -1,5 +1,7 @@
 import uuid
+from datetime import date
 
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
@@ -96,6 +98,14 @@ class BookInstance(models.Model):
         default="m",
         help_text="Доступность книги",
     )
+    borrower = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="taken_books",
+        verbose_name="кому выдана",
+    )
 
     class Meta:
         ordering = ["due_back"]
@@ -105,6 +115,10 @@ class BookInstance(models.Model):
 
     def get_absolute_url(self):
         return reverse("book-instance-detail", args=[str(self.pk)])
+
+    @property
+    def is_overdue(self):
+        return self.due_back and date.today() > self.due_back
 
 
 class Author(models.Model):

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 
@@ -47,3 +48,12 @@ class AuthorListView(generic.ListView):
 class AuthorDetailView(generic.DetailView):
     model = Author
     template_name = "catalog/author-detail.html"
+
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    paginate_by = 20
+    template_name = "catalog/book-instance-taken-list.html"
+
+    def get_queryset(self):
+        return self.request.user.taken_books.all()

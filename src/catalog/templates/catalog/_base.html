@@ -40,6 +40,11 @@
               {% if user.is_authenticated %}
                 <li>
                   Вы вошли как: <strong>{{ user.get_username }}</strong>.
+                </li>
+                <li>
+                  <a href="{% url 'taken-books' %}">Взятые книги</a>
+                </li>
+                <li>
                   <a href="{% url 'logout' %}">Выйти</a>
                 </li>
               {% else %}

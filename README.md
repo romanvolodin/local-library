@@ -46,6 +46,10 @@ In project_root/.vscode/settings.json:
             "source.organizeImports": true
         },
     },
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "cSpell.words": [
+        "isort",
+        "venv"
+    ]
 }
 ```

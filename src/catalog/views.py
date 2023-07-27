@@ -4,10 +4,11 @@ from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from catalog.forms import RenewBookModelForm
+from catalog.forms import AuthorForm, RenewBookModelForm
 from catalog.models import Author, Book, BookInstance, Genre
 
 
@@ -94,3 +95,33 @@ def renew_book_librarian(request, pk):
         "book_instance": book_instance,
     }
     return render(request, "catalog/book-renew.html", context)
+
+
+class AuthorCreate(CreateView):
+    model = Author
+    form_class = AuthorForm
+
+
+class AuthorUpdate(UpdateView):
+    model = Author
+    form_class = AuthorForm
+
+
+class AuthorDelete(DeleteView):
+    model = Author
+    success_url = reverse_lazy("authors")
+
+
+class BookCreate(CreateView):
+    model = Book
+    fields = "__all__"
+
+
+class BookUpdate(UpdateView):
+    model = Book
+    fields = "__all__"
+
+
+class BookDelete(DeleteView):
+    model = Book
+    success_url = reverse_lazy("books")

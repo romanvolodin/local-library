@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from django import forms
 from django.core.exceptions import ValidationError
 
-from catalog.models import BookInstance
+from catalog.models import Author, BookInstance
 
 
 class RenewBookForm(forms.Form):
@@ -42,3 +42,13 @@ class RenewBookModelForm(forms.ModelForm):
         labels = {"due_back": "Дата возврата"}
         widgets = {"due_back": forms.DateInput(attrs={"type": "date"})}
         help_texts = {"due_back": "Введите дату между сегодня + 4 недели (по-умолчанию 3)."}
+
+
+class AuthorForm(forms.ModelForm):
+    class Meta:
+        model = Author
+        fields = "__all__"
+        widgets = {
+            "date_of_birth": forms.DateInput(attrs={"type": "date"}),
+            "date_of_death": forms.DateInput(attrs={"type": "date"}),
+        }

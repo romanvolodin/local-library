@@ -41,8 +41,13 @@
                 <li>
                   Вы вошли как: <strong>{{ user.get_username }}</strong>.
                 </li>
+                {% if user.is_staff %}
+                  <li>
+                    <a href="{% url 'borrowed-books' %}">Взятые книги</a>
+                  </li>
+                {% endif %}
                 <li>
-                  <a href="{% url 'taken-books' %}">Взятые книги</a>
+                  <a href="{% url 'taken-books' %}">Мои книги</a>
                 </li>
                 <li>
                   <a href="{% url 'logout' %}">Выйти</a>

@@ -1,0 +1,13 @@
+{% extends "catalog/_base.html" %}
+
+{% block title %}
+  Local Library - Ошибка доступа
+{% endblock title %}
+
+{% block content %}
+  <h1>Ошибка 403</h1>
+  <p>
+    Не хватает прав для доступа к этой странице.
+    Попробуйте <a href="{% url 'login' %}">войти</a> через аккаунт с достаточными правами.
+  </p>
+{% endblock content %}

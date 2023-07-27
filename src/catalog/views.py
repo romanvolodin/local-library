@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
-from catalog.forms import RenewBookForm
+from catalog.forms import RenewBookModelForm
 from catalog.models import Author, Book, BookInstance, Genre
 
 
@@ -80,14 +80,14 @@ def renew_book_librarian(request, pk):
     book_instance = get_object_or_404(BookInstance, pk=pk)
 
     if request.method == "POST":
-        form = RenewBookForm(request.POST)
+        form = RenewBookModelForm(request.POST)
         if form.is_valid():
-            book_instance.due_back = form.cleaned_data["renewal_date"]
+            book_instance.due_back = form.cleaned_data["due_back"]
             book_instance.save()
             return HttpResponseRedirect(reverse("borrowed-books"))
     else:
         proposed_renewal_date = date.today() + timedelta(weeks=3)
-        form = RenewBookForm(initial={"renewal_date": proposed_renewal_date})
+        form = RenewBookModelForm(initial={"due_back": proposed_renewal_date})
 
     context = {
         "form": form,

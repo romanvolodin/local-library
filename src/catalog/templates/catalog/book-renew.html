@@ -1,0 +1,12 @@
+{% extends "catalog/_base.html" %}
+
+{% block content %}
+  <h1>Продление: {{ book_instance.book.title }}</h1>
+  <p>Читатель: {{ book_instance.borrower }}</p>
+  <p {% if book_instance.is_overdue %}class="text-danger"{% endif %}>Дата возврата: {{ book_instance.due_back }}</p>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Продлить" />
+  </form>
+{% endblock content %}

@@ -13,12 +13,16 @@
   </p>
   <div class="ms-3 mt-3">
     <h3>Книги</h3>
-    {% for book in author.books.all %}
-      <h4>
-        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
-        ({{ book.instances.count }})
-      </h4>
-      <p>{{ book.summary }}</p>
-    {% endfor %}
+    {% if not author.instances.all %}
+      <p>Книг этого автора пока нет.</p>
+    {% else %}
+      {% for book in author.books.all %}
+        <h4>
+          <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+          ({{ book.instances.count }})
+        </h4>
+        <p>{{ book.summary }}</p>
+      {% endfor %}
+    {% endif %}
   </div>
 {% endblock content %}

@@ -2,6 +2,7 @@ import uuid
 from datetime import date
 
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 
@@ -147,6 +148,14 @@ class Author(models.Model):
 
     def get_absolute_url(self):
         return reverse("author-detail", args=[str(self.pk)])
+
+    def clean(self):
+        if self.date_of_birth is not None and self.date_of_death is not None:
+            if self.date_of_birth > self.date_of_death:
+                raise ValidationError("Дата смерти должна быть позже даты рождения")
+
+            if self.date_of_birth == self.date_of_death:
+                raise ValidationError("Дата рождения совпадает с датой смерти")
 
 
 class Language(models.Model):

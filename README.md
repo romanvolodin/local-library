@@ -53,3 +53,54 @@ In project_root/.vscode/settings.json:
     ]
 }
 ```
+
+## Тестирование
+
+Важно из какой папки запускается команда `./manage.py test`.
+
+Чтобы запустить тесты для всех приложений сразу, нужно перейти в папку, где лежит `manage.py`. В данном случае это `src`:
+
+```bash
+$ cd src/
+$ manage.py test
+Found 6 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+......
+-----------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+```
+
+Иначе, если запускать команду из корня проекта, то Django не может обнаружить тесты. Выполняем в корне команду:
+
+```bash
+src/manage.py test
+```
+
+получаем вывод, что выполнено 0 тестов
+
+```bash
+Found 0 test(s).
+System check identified no issues (0 silenced).
+
+-----------------------------------------------
+Ran 0 tests in 0.000s
+
+OK
+```
+
+При этом, если запустить тесты для конкретного приложения, то всё отработает как надо:
+
+```bash
+$ src/manage.py test catalog
+Found 6 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+......
+-----------------------------------------------
+Ran 6 tests in 0.008s
+
+OK
+```

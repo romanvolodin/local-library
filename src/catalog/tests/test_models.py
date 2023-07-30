@@ -48,9 +48,11 @@ class TestAuthorModel(TestCase):
         author = Author.objects.get(id=2)
         self.assertRaises(ValidationError, author.clean)
 
-    def test_death_date_validation_message_birth_should_not_be_equal_birth(self):
+    def test_death_date_validation_message_birth_should_not_be_equal_death(self):
         author = Author.objects.get(id=2)
-        with self.assertRaisesMessage(ValidationError, "Дата рождения совпадает с датой смерти"):
+        with self.assertRaisesMessage(
+            ValidationError, "Дата смерти должна быть позже даты рождения"
+        ):
             author.clean()
 
     def test_death_date_validation_message_death_should_be_after_birth(self):

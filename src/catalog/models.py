@@ -151,11 +151,8 @@ class Author(models.Model):
 
     def clean(self):
         if self.date_of_birth is not None and self.date_of_death is not None:
-            if self.date_of_birth > self.date_of_death:
+            if self.date_of_birth >= self.date_of_death:
                 raise ValidationError("Дата смерти должна быть позже даты рождения")
-
-            if self.date_of_birth == self.date_of_death:
-                raise ValidationError("Дата рождения совпадает с датой смерти")
 
 
 class Language(models.Model):

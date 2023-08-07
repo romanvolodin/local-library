@@ -50,7 +50,10 @@ In project_root/.vscode/settings.json:
     "cSpell.words": [
         "isort",
         "venv"
-    ]
+    ],
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    }
 }
 ```
 

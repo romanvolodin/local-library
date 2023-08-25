@@ -13,7 +13,7 @@ insert_final_newline = true
 [*.{py,json}]
 indent_size = 4
 
-[{package.json}]
+[package.json]
 indent_size = 2
 
 [*.md]
